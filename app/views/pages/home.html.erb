@@ -1,0 +1,68 @@
+
+<div class="tabbable"> <!-- Only required for left/right tabs -->
+  <% count1 = 0 %>
+
+  <table>
+  	<tr>
+  		<td class="cell-left">
+		  <ul class="nav nav-tabs" id="categoryNav" style="display:block;">
+		  	
+		  	<% @categories_json.each do |c1| %>
+			  	<% count1 = count1 + 1 %>
+			    <li class="<%= count1 == 1 ? 'active' : ''%>"><a href="#tab<%= count1.to_s %>" data-toggle="tab"><%= c1['category_name'] %> </a></li>
+		    <% end %>
+		  </ul>
+	
+	      <% j = 0 %>
+		  <ul class="nav nav-tabs" id="publisherNav" style="display:none">
+		  	<% @publishers_json.each do |p1| %>
+			  	<% count1 = count1 + 1 %>
+			  	<% j = j + 1 %>
+			    <li class="<%= j == 1 ? 'active' : ''%>"><a href="#tab<%= count1.to_s %>" data-toggle="tab"><%= p1['publisher_name'] %> </a></li>
+		    <% end %>
+		  </ul>
+	  </td>
+	  <td class="cell-right" align="right">
+	  	<%= render "layouts/filter_dropdown" %>
+	  </td>
+    </tr>
+  </table>
+  
+
+  
+  <% count2 = 0 %>
+  <div class="tab-content" id="categoryContent">
+  	
+  		
+	  	<% @categories_json.each do |c2| %>
+		  	<% count2 = count2 + 1 %>
+		  	
+		    <div class="tab-pane <%= count2 == 1 ? 'active' : ''%>" id="tab<%= count2.to_s %>">
+		      <% c2['content_urls'].each do |cu| %>
+			      <%
+			      time_ago = time_ago_in_words(cu[0]) + " ago"
+			      title = raw cu[1][0]['title'].to_s
+			      %>
+			      <p><a href="<%=  raw cu[1][0]['link'] %>" target="blank"><%= title %></a> <%= time_ago %></p>
+		      <% end %>
+		    </div>
+	    <% end %>
+  </div>
+  <div class="tab-content" id="publisherContent" style="display:none">
+        <% k = 0 %>
+	  	<% @publishers_json.each do |p2| %>
+		  	<% count2 = count2 + 1 %>
+		  	<% k = k + 1 %>
+		    <div class="tab-pane <%= k == 1 ? 'active' : ''%>" id="tab<%= count2.to_s %>">
+		      <% p2['content_urls'].each do |cu| %>
+			      <%
+			      time_ago = time_ago_in_words(cu[0]) + " ago"
+			      title = raw cu[1][0]['title'].to_s
+			      %>
+			      <p><a href="<%=  raw cu[1][0]['link'] %>" target="blank"><%= title %></a> <%= time_ago %></p>
+		      <% end %>
+		    </div>
+	    <% end %>
+
+  </div>
+</div>

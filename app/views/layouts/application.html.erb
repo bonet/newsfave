@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!-- Copyright &#64; Bonet Sugiarto 2013 //-->
+<html>
+<head>
+  <title><%= title %></title>
+  <%= render "layouts/stylesheets" %>
+  
+</head>
+<body>
+	<header>
+	  <%= render "layouts/header" %>
+	</header>
+	<div class="container">
+		
+		<section class="round">
+			<% flash.each do |key, value| %>
+			  <div class="flash <%= key %>" > <%= value %> </div>
+			<% end %>
+			<%= yield %>
+		</section>
+		<%= render "layouts/footer" %>
+	</div>
+	<%= javascript_include_tag 'application' %>
+</body>
+</html>

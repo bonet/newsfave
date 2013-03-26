@@ -1,18 +1,17 @@
 class UsersController < ApplicationController
   
-  before_filter :session_authenticate, :only => [:edit, :update]
+  before_filter :session_authenticate, :only => [:edit, :show, :update, :update_pub_cats, :feed_subscribe]
   
-  #new
+  before_filter :params_check, :only => [:feed_subscribe]
+  
   def new
     @user = User.new
     @title = "Sign Up"
-
-    #logger.debug "Log Level is: " + logger.level.to_s
   end
   
-  #show
+  
   def show
-    unless signed_in? #sessions helper
+    unless signed_in? #sessions_helper
       redirect_to signin_path
     end
     
@@ -20,30 +19,36 @@ class UsersController < ApplicationController
     @title = @user.username
   end
   
-  #create
+  
   def create
     @user = User.new(params[:user])
 
     if @user.save
-      sign_in @user   #sessions helper
-      flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user
+      
+      sign_in @user   #sessions_helper
+      render :json => { :username => @user.username }
+      
     else
-      @title = "Sign Up"
-      render 'new'
+      render :json => { :errors => @user.errors.full_messages }, :status => 422
     end
   end
   
-  #edit
+  
   def edit
     @user = User.find(session[:user_id])
     render 'edit'
   end
   
-  #update
+  
+  def update_pub_cats
+    @user = User.find(session[:user_id])
+  end
+  
+  
+  
   def update
     @user = User.find(session[:user_id])
-    #logger.debug "+++ USER PASSWORD I: "+ @user.password.to_s
+    
     param_hash = { :username => params[:user][:username], :email => params[:user][:email] }
 
     #only update avatar if the avatar file is present
@@ -57,18 +62,46 @@ class UsersController < ApplicationController
     end
     
     if @user.update_attributes(param_hash)
-      #logger.debug "USER PASSWORD II: "+ @user.password.to_s
+      
       flash[:success] = "Profile Updated"
       redirect_to @user
     else
       render 'edit'
     end
-    #logger.debug "USER: " + session[:user].to_s
+    
+  end
+  
+  
+  def feed_subscribe
+    
+    result = Curl::Easy.http_post(Silverstar::Application.config.feed_webservice_url + "/register_pub_cats/", 
+                         Curl::PostField.content('pub_cat_ids', params['pub_cat_ids']))
+    pca = JSON.parse(result.body_str)
+    
+    unless pca['_id'].nil?
+      @user = User.find(session[:user_id])
+      @user.pub_cat_aggregate_id = pca['_id'];
+      @user.save
+    end
+    
+    render :text => { "pub_cat_aggregate_id" => pca['_id'].to_s }.to_json
     
   end
   
   private
+    
     def session_authenticate
-      deny_access unless signed_in? #sessions helper functions
+      self.set_cache_buster # ApplicationController method
+      deny_access unless signed_in? #sessions_helper
     end
+    
+    def session_authenticate_no_html
+      self.set_cache_buster # ApplicationController method
+      deny_access_no_html unless signed_in? #sessions_helper
+    end
+    
+    def params_check
+      return render :nothing => true if params['pub_cat_ids'].nil?
+    end
+    
 end

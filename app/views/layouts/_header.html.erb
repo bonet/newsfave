@@ -13,24 +13,25 @@
           <li class="<%= params[:controller] == 'pages' && params[:action] == 'contact' ? 'active' : '' %>"><%= link_to 'Contact', contact_path %></li>
           <li class="<%= params[:controller] == 'pages' && params[:action] == 'feedlist' ? 'active' : '' %>"><%= link_to 'Feed List', feedlist_path %></li>
           <% unless signed_in? %>
-            <li class="<%= params[:controller] == 'users' && params[:action] == 'new' ? 'active' : '' %>"><%= link_to 'Sign-Up', signup_path %></li>
+            <li class="<%= params[:controller] == 'users' && params[:action] == 'new' ? 'active' : '' %>"><a href="#signup_modal" data-toggle="modal">Personalize!</a></li>
           <% end %>
         </ul>
         
         
-        
-        <% if signed_in? %>
-          <ul class="nav" style="float:right">
-			<li class="<%= params[:controller] == 'users' && params[:action] == 'show' ? 'active' : '' %>"><%= link_to 'Profile', user_path(session[:user_id]) %></li>
-			<li><%= link_to 'Sign out', signout_path, :method => :delete %></li>
-		  </ul>
-		<% else %>
-		  <%= form_for( :session, :url => sessions_path, :html => {:class => "navbar-form pull-right"} ) do |f| %>
-            <%= f.text_field :email, :class => "span2", :placeholder => "Email"  %>
-            <%= f.password_field :password, :class => "span2", :placeholder => "Password"  %>
-            <%= f.submit "Sign In", :class => "btn" %>
-          <% end %>
-		<% end %>
+        <div id="signedInOrSignUp">
+	        <% if signed_in? %>
+	          <ul class="nav" style="float:right">
+				<li class="<%= params[:controller] == 'users' && params[:action] == 'show' ? 'active' : '' %>"><%= link_to 'Profile', user_path(session[:user_id]) %></li>
+				<li><%= link_to 'Sign out', signout_path, :method => :delete %></li>
+			  </ul>
+			<% else %>
+			  <%= form_for( :session, :url => sessions_path, :html => {:class => "navbar-form pull-right"} ) do |f| %>
+	            <%= f.text_field :email, :class => "span2", :placeholder => "Email"  %>
+	            <%= f.password_field :password, :class => "span2", :placeholder => "Password"  %>
+	            <%= f.submit "Sign In", :class => "btn" %>
+	          <% end %>
+			<% end %>
+		</div>
       </div><!--/.nav-collapse -->
     </div>
   </div>

@@ -5,7 +5,7 @@
   <table>
   	<tr>
   		<td class="cell-left">
-		  <ul class="nav nav-tabs" id="categoryNav" style="display:block;">
+		  <ul class="nav nav-tabs" id="category-nav" style="display:block;">
 		  	
 		  	<% @categories_json.each do |c1| %>
 			  	<% count1 = count1 + 1 %>
@@ -14,7 +14,7 @@
 		  </ul>
 	
 	      <% j = 0 %>
-		  <ul class="nav nav-tabs" id="publisherNav" style="display:none">
+		  <ul class="nav nav-tabs" id="publisher-nav" style="display:none">
 		  	<% @publishers_json.each do |p1| %>
 			  	<% count1 = count1 + 1 %>
 			  	<% j = j + 1 %>
@@ -31,7 +31,7 @@
 
   
   <% count2 = 0 %>
-  <div class="tab-content" id="categoryContent">
+  <div class="tab-content" id="category-content">
   	
   		
 	  	<% @categories_json.each do |c2| %>
@@ -48,7 +48,7 @@
 		    </div>
 	    <% end %>
   </div>
-  <div class="tab-content" id="publisherContent" style="display:none">
+  <div class="tab-content" id="publisher-content" style="display:none">
         <% k = 0 %>
 	  	<% @publishers_json.each do |p2| %>
 		  	<% count2 = count2 + 1 %>

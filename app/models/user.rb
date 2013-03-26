@@ -1,11 +1,11 @@
 class User < ActiveRecord::Base
   
-  require 'paperclip'
+  #require 'paperclip'
 
   #attr
-  attr_accessor :password # virtual attribute (a.k.a not in the database).  User class already has :email and :password attributes -> from Users db table columns
+  attr_accessor :password 
 
-  attr_accessible :email, :username, :password, :password_confirmation, :avatar # for "new User(params_array)" (a.k.a mass assignment)
+  attr_accessible :username, :email, :password, :password_confirmation
   
   #validation
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
                        :confirmation => { :if =>  :new_user_or_password_parameter_exists? },  # automatically creates ':password_confirmation' virtual attribute
                        :length => { :if =>  :new_user_or_password_parameter_exists?, :within => 6..40 }
   
-  
+=begin
   #Paperclip Stuff
   has_attached_file :avatar, :path           => '/images/:id/:style.:extension',
                                 :storage        => :s3,
@@ -43,27 +43,20 @@ class User < ActiveRecord::Base
   validates_attachment :avatar, :presence => { :if =>  :new_user_or_avatar_parameter_exists? },
                                 :size => { :if =>  :new_user_or_avatar_parameter_exists?, :less_than => 5.megabytes },
                                 :content_type => { :if =>  :new_user_or_avatar_parameter_exists?, :content_type => ['image/jpeg', 'image/png'] }
-                                
-
 
   #Paperclip Stuff Ends
-  
+=end
+
   before_save :encrypt_password, :if => :new_user_or_password_parameter_exists?
   
   
   #Email - Password Authentication
   def self.authenticate(email, submitted_password)
-    user = find_by(email: email)
+    user = find_by_email(email)
     return nil if user.nil?
     return user if user.has_password?(submitted_password)
   end
 
-=begin
-  def self.authenticate_with_salt(id, cookie_salt)
-    user = find_by_id(id)
-    (user && user.salt == cookie_salt) ? user : nil
-  end
-=end
   
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)

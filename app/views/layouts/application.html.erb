@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<!-- Copyright &#64; Bonet Sugiarto 2013 //-->
 <html>
 <head>
+  <!-- Copyright (c) Bonet Sugiarto 2013 //-->
+  
   <title><%= title %></title>
   <%= render "layouts/stylesheets" %>
-  
+  <%= javascript_include_tag 'application' %>
 </head>
 <body>
+	
 	<header>
 	  <%= render "layouts/header" %>
 	</header>
+	
 	<div class="container">
 		
 		<section class="round">
@@ -18,8 +21,10 @@
 			<% end %>
 			<%= yield %>
 		</section>
+
 		<%= render "layouts/footer" %>
+		<%= render "layouts/signup" %>
 	</div>
-	<%= javascript_include_tag 'application' %>
+	
 </body>
 </html>

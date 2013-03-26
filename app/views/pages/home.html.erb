@@ -9,7 +9,7 @@
 		  	
 		  	<% @categories_json.each do |c1| %>
 			  	<% count1 = count1 + 1 %>
-			    <li class="<%= count1 == 1 ? 'active' : ''%>"><a href="#tab<%= count1.to_s %>" data-toggle="tab"><%= c1['category_name'] %> </a></li>
+			    <li class="content-tab <%= count1 == 1 ? 'active' : ''%>"><a href="#tab<%= count1.to_s %>" data-toggle="tab"><%= c1['category_name'] %> </a></li>
 		    <% end %>
 		  </ul>
 	
@@ -18,7 +18,7 @@
 		  	<% @publishers_json.each do |p1| %>
 			  	<% count1 = count1 + 1 %>
 			  	<% j = j + 1 %>
-			    <li class="<%= j == 1 ? 'active' : ''%>"><a href="#tab<%= count1.to_s %>" data-toggle="tab"><%= p1['publisher_name'] %> </a></li>
+			    <li class="content-tab <%= j == 1 ? 'active' : ''%>"><a href="#tab<%= count1.to_s %>" data-toggle="tab"><%= p1['publisher_name'] %> </a></li>
 		    <% end %>
 		  </ul>
 	  </td>
@@ -43,7 +43,7 @@
 			      time_ago = time_ago_in_words(cu[0]) + " ago"
 			      title = raw cu[1][0]['title'].to_s
 			      %>
-			      <p><a href="<%=  raw cu[1][0]['link'] %>" target="blank"><%= title %></a> <%= time_ago %></p>
+			      <div class="content-url"><a href="<%=  raw cu[1][0]['link'] %>" target="blank"><%= title %></a><br /><%= time_ago %></div>
 		      <% end %>
 		    </div>
 	    <% end %>
@@ -59,7 +59,7 @@
 			      time_ago = time_ago_in_words(cu[0]) + " ago"
 			      title = raw cu[1][0]['title'].to_s
 			      %>
-			      <p><a href="<%=  raw cu[1][0]['link'] %>" target="blank"><%= title %></a> <%= time_ago %></p>
+			      <p class="content-url"><a href="<%=  raw cu[1][0]['link'] %>" target="blank"><%= title %></a><br /><%= time_ago %></p>
 		      <% end %>
 		    </div>
 	    <% end %>

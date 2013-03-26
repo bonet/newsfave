@@ -9,20 +9,20 @@
       <a class="homebrand" href="/"><%= logo %> NewsFave.com</a>
       <div class="nav-collapse collapse">
         <ul class="nav">
-          <li class="<%= params[:controller] == 'pages' && params[:action] == 'about' ? 'active' : '' %>"><%= link_to 'About', about_path %></li>
-          <li class="<%= params[:controller] == 'pages' && params[:action] == 'contact' ? 'active' : '' %>"><%= link_to 'Contact', contact_path %></li>
-          <li class="<%= params[:controller] == 'pages' && params[:action] == 'feedlist' ? 'active' : '' %>"><%= link_to 'Feed List', feedlist_path %></li>
+          <li class="header-tab <%= params[:controller] == 'pages' && params[:action] == 'about' ? 'active' : '' %>"><%= link_to 'About', about_path %></li>
+          <li class="header-tab <%= params[:controller] == 'pages' && params[:action] == 'contact' ? 'active' : '' %>"><%= link_to 'Contact', contact_path %></li>
+          <li class="header-tab <%= params[:controller] == 'pages' && params[:action] == 'feedlist' ? 'active' : '' %>"><%= link_to 'Feed List', feedlist_path %></li>
           <% unless signed_in? %>
-            <li class="<%= params[:controller] == 'users' && params[:action] == 'new' ? 'active' : '' %>"><a href="#signup_modal" data-toggle="modal">Personalize!</a></li>
+            <li class="header-tab <%= params[:controller] == 'users' && params[:action] == 'new' ? 'active' : '' %>"><a href="#signup_modal" data-toggle="modal" style="color:#EAB50F">Personalize!</a></li>
           <% end %>
         </ul>
         
         
-        <div id="signedInOrSignUp">
+        <div id="signed_in_or_signed_up">
 	        <% if signed_in? %>
 	          <ul class="nav" style="float:right">
-				<li class="<%= params[:controller] == 'users' && params[:action] == 'show' ? 'active' : '' %>"><%= link_to 'Profile', user_path(session[:user_id]) %></li>
-				<li><%= link_to 'Sign out', signout_path, :method => :delete %></li>
+				<li class="header-tab <%= params[:controller] == 'users' && params[:action] == 'show' ? 'active' : '' %>"><%= link_to 'Profile', user_path(session[:user_id]) %></li>
+				<li class="header-tab"><%= link_to 'Sign out', signout_path, :method => :delete %></li>
 			  </ul>
 			<% else %>
 			  <%= form_for( :session, :url => sessions_path, :html => {:class => "navbar-form pull-right"} ) do |f| %>

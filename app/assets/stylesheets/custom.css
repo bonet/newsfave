@@ -5,7 +5,7 @@
 */
 
 body {
-	background: #6cc;
+	background: #3d79d0; /* #6cc; */
 }
 
 header {
@@ -24,10 +24,13 @@ header .logo_header {
 	 float: left;
 }
 
+header a {
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
 header a.homebrand {
-	font-weight: bold;
-	font-style: italic;
-	font-size: 24px;
+	
+	font-size: 40px;
 	display: block;
 	float: left;
 	padding: 10px 20px 10px;
@@ -55,6 +58,15 @@ header .logo_header h2 {
 	 font-weight: bold;
 }
 */
+
+#signed_in_or_signed_up {
+	padding: 3px 0 0 0;
+}
+
+.container {
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
 section {
 	margin-top: 1em;
 	font-size: 120%;
@@ -69,57 +81,72 @@ section h1 {
 /* Links */
 
 a {
-	color: #369;
+	color: #444;
+	font-size: 20px;
 	text-decoration: none;
 }
 
 a:hover {
-	color: #551A8A;
+	color: #528230;
 	text-decoration: underline;
 }
 
 a:visited {
-	color: #551A8A;
+	color: #3d79d0;
 }
 
 /* Navigation */
 
 nav {
-	float: right;
+	
 }
 
-nav {
-	background-color:white;
-	padding: 0 0.7em;
-	white-space: nowrap;
+ul.nav {
+
 }
 
-nav ul {
-	margin: 0;
-	padding: 0;
+ul.nav {
+
 } 
 
-nav ul li {
-	list-style-type: none;
-	display: inline-block;
-	padding: 0.2em 0;
-}
-
-nav ul li a {
-	padding: 0 5px;
+ul.nav li {
 	font-weight: bold;
 }
 
-nav ul li a:visited {
+ul.nav li.header-tab {
+	font-weight: normal;
+}
+
+ul.nav li a {
+	color: #444;
+}
+
+ul.nav li a:hover {
+	color: #444;
+}
+
+ul.nav li.active a {
+	
 	color: #09c;
 }
 
-nav ul li a:hover {
-	text-decoration: underline;
+ul.nav li.active a:hover {
+	color: #09c;
 }
 
+.header-tab {
+	padding: 4px 0 0;
+}
+
+/* TAB */
+
+.content-tab a {
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 30px;
+}
 .tabbable table {
-	width:100%
+	width:100%;
+	margin: 0 0 10px 0;
 }
 
 .tabbable table tr td.cell-right {
@@ -160,6 +187,13 @@ nav ul li a:hover {
 
 .span4homewidth {
 	width: 350px;
+}
+
+/* Content URLs*/
+.content-url {
+	padding: 0 0 10px 0;
+	margin: 0 0 7px 0;
+	border-bottom: 1px #ccc solid;
 }
 
 /* Sign up button */

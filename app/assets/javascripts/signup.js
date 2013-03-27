@@ -68,4 +68,10 @@ $(function() {
 	});
 	
   });
+  
+  $("#signup_modal").on('hidden', function () {
+  	if($("#signup_step1").html() == "") { //if already moved on to SignUp Step 2 (user already signed up, but not subscribed to feeds yet)
+  		window.location.replace("/");
+  	}
+  });
 });

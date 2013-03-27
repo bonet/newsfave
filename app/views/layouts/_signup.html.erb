@@ -36,12 +36,15 @@
 	
 
 		<%= form_tag("/users/update_pub_cats", :method => "post", :class => "hide", :id => "signup_step2") do %>
-			<h1>Choose Feed</h1>
-			<br />
+			<h1>Choose Feeds</h1>
+
+			<p style="margin-top:5px;">Congratulations, you've been signed up to NewsFave.com!</p> 
+			<p style="margin-bottom:15px;">Now you can subscribe to the newsfeeds of your choice by picking the publishers and categories below:</p>
+
 			<table style="width:100%">
 				<tr>
-					<td class="namelist-publisher-title"><b>Publisher</b></td>
-					<td class="namelist-category-title"><b>Category</b></td>
+					<td class="namelist-publisher-title"><b>Publishers</b></td>
+					<td class="namelist-category-title"><b><span id="category_title"></span>Categories</b></td>
 				</tr>
 				<tr>
 					<td style="width:50%;" valign="top">
@@ -77,6 +80,8 @@
 				//Publisher button on mouseover
 			    $(".namelist-publisher").on("mouseover", function() {
 				  	var key = $(this).attr('id').substring(9);
+				  	var pub_name = $(this).children("span").html();
+				  	$("#category_title").html(pub_name + " ");
 				  	$(".cat-namelist-publisher").hide();
 				  	$("#cat_publisher"+key).show();
 				  	var pub_val = $("input:hidden[name='pub["+ key +"]']").val();

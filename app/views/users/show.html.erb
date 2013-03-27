@@ -2,14 +2,45 @@
 <table class="profile" summary="Profile Information">
   <tr>
   	<td class="main">
-  	  <h1>
-        <%= @user.username %>
-      </h1>
-    </td>
-    <td class="sidebar round">
-    	<strong>Name</strong> <%= @user.username %> <br />
-    	<strong>URL</strong> <%= link_to user_path(@user), @user%> <br />
-    	<span><%= link_to "Edit Info",  edit_user_path(@user) %></span>
+  		<h2>
+			<%= @user.username %>
+			<span><%= link_to "[Edit Info]",  edit_user_path(@user) , :class => "edit-info" %></span>
+		</h2>
+
+		<div>
+			<p class="profile1">Email: </p> <p class="profile2"><%= @user.email %></p>
+		</div>
+		<div class="profile-bottom">
+			<p class="profile1">URL: </p> <p class="profile2"><%= link_to user_path(@user), @user%></p></div>
+		</div>
+
+      <div>
+      	<h4>Subscribed Feeds: <span><%= link_to "[Edit]",  edit_user_path(@user) , :class => "edit-info" %></span></h4>
+      	<ul>
+	      	<% @namelist_hash.each do |publisher, categories| %>
+	      	
+	      	<li style="margin: 0 0 20px 0">
+	      		<table style="margin: -20px 0 0 0">
+	      			<tr style="border-bottom: 1px #aaa solid">
+	      				<td style="width:120px" valign="top">Publisher:</td>
+	      				<td> <%= publisher.to_s %> </td>
+	      			</tr>
+	      			<tr>
+	      				<td style="width:120px" valign="top">Categories:</td>
+	      				<td> 
+	      					<ul style="list-style:none; margin-left: 0; padding-left: 0">
+				      			<% categories.each do |cat| %>
+				      				<li> <%= cat.to_s %> </li>
+				      			<% end %>
+				      		</ul>
+	      				</td>
+	      			</tr>
+	      		</table>
+	      	</li>
+	      	<% end %>
+		</ul>      	
+      </div>
+
     </td>
   </tr>
 </table>

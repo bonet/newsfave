@@ -15,8 +15,31 @@ class UsersController < ApplicationController
       redirect_to signin_path
     end
     
-    @user = User.find(params[:id])
+    @user = User.find(session[:user_id])
     @title = @user.username
+    
+    @pub_cat_json = ""
+    
+    unless(@user.pub_cat_aggregate_id.nil?)
+      
+      result = Curl.get(Silverstar::Application.config.feed_webservice_url + "/get_personalized_pub_cat_namelist/" + @user.pub_cat_aggregate_id.to_s)
+      @pub_cat_namelist_json = JSON.parse(result.body_str) unless result.body_str == "null"
+    end
+    
+    @namelist_hash = {}
+    
+    @pub_cat_namelist_json.each do |k,v| 
+      v['categories'].each do |m|
+        if m['owned'] == "true"
+          if @namelist_hash[v['publisher_name']].nil?
+            @namelist_hash[v['publisher_name']] = []
+          end
+          
+          @namelist_hash[v['publisher_name']] << m['category_name']
+        end
+      end
+    end
+    
   end
   
   

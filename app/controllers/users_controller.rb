@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_filter :session_authenticate, :only => [:edit, :show, :update, :update_pub_cats, :feed_subscribe]
   
   before_filter :params_check, :only => [:feed_subscribe]
+
   
   def new
     @user = User.new
@@ -20,12 +21,15 @@ class UsersController < ApplicationController
     
     @pub_cat_json = ""
     
-    unless(@user.pub_cat_aggregate_id.nil?)
-      
-      result = Curl.get(Silverstar::Application.config.feed_webservice_url + "/get_personalized_pub_cat_namelist/" + @user.pub_cat_aggregate_id.to_s)
-      @pub_cat_namelist_json = JSON.parse(result.body_str) unless result.body_str == "null"
-    end
+    @api_string = "/get_pub_cat_namelist"
     
+    if @user.pub_cat_aggregate_id.present?
+      @api_string = "/get_personalized_pub_cat_namelist/" + @user.pub_cat_aggregate_id.to_s
+    end
+
+    result = Curl.get(Silverstar::Application.config.feed_webservice_url + @api_string)
+    @pub_cat_namelist_json = JSON.parse(result.body_str) unless result.body_str == "null"
+
     @namelist_hash = {}
     
     @pub_cat_namelist_json.each do |k,v| 
@@ -71,27 +75,22 @@ class UsersController < ApplicationController
   
   def update
     @user = User.find(session[:user_id])
-    
-    param_hash = { :username => params[:user][:username], :email => params[:user][:email] }
 
-    #only update avatar if the avatar file is present
-    if params[:user][:avatar].present? 
-      param_hash[:avatar] = params[:user][:avatar]
-    end
-    
-    #only update password if password field is present
-    if params[:user][:password].present? 
-      param_hash[:password] = params[:user][:password]
-    end
-    
-    if @user.update_attributes(param_hash)
+    if params[:edit_info].present?
+      if params[:user][:password].present? || params[:user][:password_confirmation].present?
+        if params[:user][:password] == params[:user][:password_confirmation]
+          @user.password = params[:user][:password] 
+          @user.save
+        else
+          #@user.errors.full_messages = "Confirm password field doesn't match with password field"
+        end
+      end
       
-      flash[:success] = "Profile Updated"
-      redirect_to @user
-    else
-      render 'edit'
+    elsif params[:edit_subscription].present?
+      
     end
     
+    render 'edit'
   end
   
   

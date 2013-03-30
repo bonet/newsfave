@@ -74,4 +74,66 @@ $(function() {
   		window.location.replace("/");
   	}
   });
+  
+	//Publisher button on mouseover
+	$(".namelist-publisher").on("mouseover", function() {
+	  	var key = $(this).attr('id').substring(9);
+	  	var pub_name = $(this).children("span").html();
+	  	$("#category_title").html(pub_name + " ");
+	  	$(".cat-namelist-publisher").hide();
+	  	$("#cat_publisher"+key).show();
+	  	var pub_val = $("input:hidden[name='pub["+ key +"]']").val();
+	  	
+	  	if(pub_val.length > 0){
+	  		var arr = pub_val.split(",");
+	  		
+		  	for(k in arr) {
+		  		$("#pub_cat."+arr[k]+"").prop('checked', true);
+		  	}
+	  	}
+	});
+	
+	
+	//Publisher button on click
+	$(".namelist-publisher").on("click", function() {
+		var key = $(this).attr('id').substring(9);
+		if ($(this).hasClass('chosen')) {  //un-choose
+			$(this).removeClass('chosen');
+			$(".checkbox-for-publisher"+key).each(function(index, obj){
+				obj.checked = false;
+			});
+			
+			$("input:hidden[name='pub["+ key +"]']").prop("value", ""); //empty csv list of pub_cats in input hidden value
+		}
+		else {
+			$(this).addClass('chosen');  //choose
+			var arr = [];
+			$(".checkbox-for-publisher"+key).each(function(index, obj) {
+				obj.checked = true;
+				arr.push(obj.value);
+			});
+			var str = arr.join(",");
+			$("input:hidden[name='pub["+ key +"]']").val(str);  //update csv list of pub_cats in input hidden value
+		}
+	});
+	
+	//Category checkbox on click
+	$("input:checkbox[name=pub_cat]").on("click", function() {
+		var pub_id = this.className.substring(22);
+		
+		if($("#publisher"+pub_id).hasClass("chosen")){
+			var arr = [];
+			$(this).parent().children('input:checkbox').each(function(index, object ) {
+				
+				if(object.checked == true) {
+					arr.push(object.value);
+				}
+			});
+			
+			var str = arr.join(",");
+			
+			$("input:hidden[name='pub["+ pub_id +"]']").val(str);  //update csv list of pub_cats in input hidden value
+		}
+		
+	});
 });

@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       
     else
       sign_in user #sessions helper
-      redirect_to user
+      redirect_to root_path
     end
   end
   

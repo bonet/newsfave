@@ -26,13 +26,14 @@ gem "aws-s3",            :require => "aws/s3"
 gem 'aws-sdk', '~> 1.3.4'
 
 gem 'curb'
-gem 'thin'
 
 group :production do
   gem "pg"
+  gem 'unicorn'
 end
 
 group :development, :test do
+  gem 'thin'
   gem 'sqlite3'
   gem 'annotate'
 end

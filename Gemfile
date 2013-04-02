@@ -27,8 +27,11 @@ gem 'aws-sdk', '~> 1.3.4'
 
 gem 'curb'
 
+gem 'foreman'
+
 group :production do
-  gem "pg"
+  gem 'pg'
+  gem 'newrelic_rpm'
   gem 'unicorn'
 end
 

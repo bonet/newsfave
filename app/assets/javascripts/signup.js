@@ -52,21 +52,26 @@ $(function() {
   	});
   	str = str.replace(/,$/g,''); //trim ',' on last string
   	
-  	var request = $.ajax({
-	  url: "/feed_subscribe",
-	  type: "GET",
-	  data: {pub_cat_ids : str},
-	  dataType: "json"
-	});
-	
-	request.done(function(msg, textStatus, jqXHR) {
-	  window.location.replace("/");
-	});
-	
-	request.fail(function(jqXHR, textStatus) {
-		window.location.replace("/");
-	});
-	
+  	if(str.length > 0){
+  		var request = $.ajax({
+		  url: "/feed_subscribe",
+		  type: "GET",
+		  data: {pub_cat_ids : str},
+		  dataType: "json"
+		});
+		
+		request.done(function(msg, textStatus, jqXHR) {
+		  window.location.replace("/");
+		});
+		
+		request.fail(function(jqXHR, textStatus) {
+			window.location.replace("/");
+		});
+  	}
+  	else {
+  		alert("Please pick at least one publisher and one category.")
+  	}
+  	
   });
   
   $("#signup_modal").on('hidden', function () {
@@ -121,18 +126,26 @@ $(function() {
 	$("input:checkbox[name=pub_cat]").on("click", function() {
 		var pub_id = this.className.substring(22);
 		
-		if($("#publisher"+pub_id).hasClass("chosen")){
-			var arr = [];
-			$(this).parent().children('input:checkbox').each(function(index, object ) {
-				
-				if(object.checked == true) {
-					arr.push(object.value);
-				}
-			});
+		//if one category checkbox if clicked, it automatically chooses the publisher too
+		if($("#publisher"+pub_id).hasClass("chosen") == false){
+			$("#publisher"+pub_id).addClass("chosen");
+		}
+		
+		var arr = [];
+		$(this).parent().children('input:checkbox').each(function(index, object ) {
 			
-			var str = arr.join(",");
-			
-			$("input:hidden[name='pub["+ pub_id +"]']").val(str);  //update csv list of pub_cats in input hidden value
+			if(object.checked == true) {
+				arr.push(object.value);
+			}
+		});
+		
+		var str = arr.join(",");
+		
+		$("input:hidden[name='pub["+ pub_id +"]']").val(str);  //update csv list of pub_cats in input hidden value
+		
+		//un-choose publisher if no categories for that publisher is checked 
+		if(str.length === 0) {
+			$("#publisher"+pub_id).removeClass("chosen");
 		}
 		
 	});

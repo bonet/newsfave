@@ -2,31 +2,25 @@
 <div class="tabbable"> <!-- Only required for left/right tabs -->
   <% count1 = 0 %>
 
-  <table>
-  	<tr>
-  		<td class="cell-left">
-		  <ul class="nav nav-tabs" id="category-nav" style="display:block;">
-		  	
-		  	<% @categories_json.each do |c1| %>
-			  	<% count1 = count1 + 1 %>
-			    <li class="content-tab <%= count1 == 1 ? 'active' : ''%>"><a href="#tab<%= count1.to_s %>" data-toggle="tab"><%= c1['category_name'] %> </a></li>
-		    <% end %>
-		  </ul>
-	
-	      <% j = 0 %>
-		  <ul class="nav nav-tabs" id="publisher-nav" style="display:none">
-		  	<% @publishers_json.each do |p1| %>
-			  	<% count1 = count1 + 1 %>
-			  	<% j = j + 1 %>
-			    <li class="content-tab <%= j == 1 ? 'active' : ''%>"><a href="#tab<%= count1.to_s %>" data-toggle="tab"><%= p1['publisher_name'] %> </a></li>
-		    <% end %>
-		  </ul>
-		  <%= render "layouts/filter_dropdown" %>
-	  </td>
-	  	
 
-    </tr>
-  </table>
+  <ul class="nav nav-tabs" id="category-nav" style="display:block;">
+  	
+  	<% @categories_json.each do |c1| %>
+	  	<% count1 = count1 + 1 %>
+	    <li class="content-tab <%= count1 == 1 ? 'active' : ''%>"><a href="#tab<%= count1.to_s %>" data-toggle="tab"><%= c1['category_name'] %> </a></li>
+    <% end %>
+  </ul>
+
+  <% j = 0 %>
+  <ul class="nav nav-tabs" id="publisher-nav" style="display:none">
+  	<% @publishers_json.each do |p1| %>
+	  	<% count1 = count1 + 1 %>
+	  	<% j = j + 1 %>
+	    <li class="content-tab <%= j == 1 ? 'active' : ''%>"><a href="#tab<%= count1.to_s %>" data-toggle="tab"><%= p1['publisher_name'] %> </a></li>
+    <% end %>
+  </ul>
+  <%= render "layouts/filter_dropdown" %>
+
   
 
   

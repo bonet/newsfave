@@ -11,7 +11,7 @@ module ApplicationHelper
   end
   
   def logo
-    image_tag("logo-14.png", :alt => 'NewsFave Logo', :class => "")
+    image_tag("logo-1.png", :alt => 'NewsFave Logo', :class => "")
   end
   
   def valid_json? json_  

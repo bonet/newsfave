@@ -15,8 +15,8 @@ header {
 
 
 header img {
-	height: 25px;
-	margin-top: -6px;
+	height: 30px;
+	margin-top: -4px;
 }
 
 header .logo_header {
@@ -33,8 +33,7 @@ header a.homebrand {
 	font-size: 40px;
 	display: block;
 	float: left;
-	padding: 10px 20px 10px;
-	margin-left: -20px;
+	margin: 12px 20px 0 0;
 	text-decoration: none;
 	color: #999;
 }

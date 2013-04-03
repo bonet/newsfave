@@ -152,11 +152,9 @@ ul.nav-tabs li a {
 	padding: 8px 0; 
 	line-height: 20px;
 	border-bottom: 1px solid #aaa; /*#aaa;*/
-	margin: 0;
 	height: 20px;
 	overflow: hidden;
-	position: relative;
-	top: -57px;
+	margin-top: -57px;
 	float: right;
 	width: 250px;
 }

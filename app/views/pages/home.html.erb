@@ -21,10 +21,10 @@
 			    <li class="content-tab <%= j == 1 ? 'active' : ''%>"><a href="#tab<%= count1.to_s %>" data-toggle="tab"><%= p1['publisher_name'] %> </a></li>
 		    <% end %>
 		  </ul>
+		  <%= render "layouts/filter_dropdown" %>
 	  </td>
-	  <td class="cell-right" align="right">
-	  	<%= render "layouts/filter_dropdown" %>
-	  </td>
+	  	
+
     </tr>
   </table>
   

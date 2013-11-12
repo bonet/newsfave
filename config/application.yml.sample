@@ -1,15 +1,19 @@
 development:
   RAILS_ENV: 'development'
   SECRET_TOKEN: ''
+  DEVISE_SECRET_KEY: ''
 
 test:
   RAILS_ENV: 'test'
   SECRET_TOKEN: ''
+  DEVISE_SECRET_KEY: ''
 
 staging:
   RAILS_ENV: 'staging'
   SECRET_TOKEN: ''
+  DEVISE_SECRET_KEY: ''
 
 production:
   RAILS_ENV: 'production'
   SECRET_TOKEN: ''
+  DEVISE_SECRET_KEY: ''

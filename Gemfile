@@ -13,6 +13,7 @@ gem 'curb'
 gem 'foreman'
 gem 'jquery-rails'
 gem 'figaro'
+gem 'devise'
   
 group :production do
   gem 'pg'

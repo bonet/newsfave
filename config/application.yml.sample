@@ -1,6 +1,15 @@
 development:
-  HELLO: developers
+  RAILS_ENV: 'development'
+  SECRET_TOKEN: ''
+
 test:
-  HELLO: testers
+  RAILS_ENV: 'test'
+  SECRET_TOKEN: ''
+
+staging:
+  RAILS_ENV: 'staging'
+  SECRET_TOKEN: ''
+
 production:
-  HELLO: users
+  RAILS_ENV: 'production'
+  SECRET_TOKEN: ''

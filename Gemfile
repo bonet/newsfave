@@ -3,22 +3,17 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.12'
 
 gem 'rb-readline'
-
 gem 'rake'
-
 gem 'gravatar_image_tag'
-
 gem "cocaine"
 gem "paperclip"
-
 gem "aws-s3",            :require => "aws/s3"
-
 gem 'aws-sdk', '~> 1.3.4'
-
 gem 'curb'
-
 gem 'foreman'
-
+gem 'jquery-rails'
+gem 'figaro'
+  
 group :production do
   gem 'pg'
   gem 'newrelic_rpm'
@@ -27,18 +22,6 @@ end
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'figaro'
-  
-  gem 'rspec-rails'
-  
-  gem 'mongoid-rspec'
-  
-  gem 'guard-bundler'
-  gem 'guard-rspec'
-  gem 'guard-spork'
-  
-  gem 'factory_girl_rails'
-
   gem 'simplecov'
 end
 
@@ -49,7 +32,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'colorize'
-
+  
   gem 'rb-fchange', :require => false
   gem 'rb-fsevent', '~> 0.9.2'
   gem 'rb-inotify', :require => false
@@ -57,10 +40,15 @@ group :development do
 end
 
 group :test do
+  gem 'rspec-rails'
+  gem 'mongoid-rspec'
+  gem 'guard-bundler'
+  gem 'guard-rspec'
+  gem 'guard-spork'
+  gem 'factory_girl_rails'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'shoulda-matchers'
-  #gem 'terminal-notifier-guard' # OSX 10.8
   gem 'mailcatcher'
 end
 
@@ -69,5 +57,3 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 end
-
-gem 'jquery-rails'

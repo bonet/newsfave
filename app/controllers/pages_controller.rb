@@ -8,13 +8,13 @@ class PagesController < ApplicationController
       @user = User.find(session[:user_id])
       
       unless @user.pub_cat_aggregate_id.nil?
-        result = Curl.get(Silverstar::Application.config.feed_webservice_url + "/get_personalized_pub_cat_aggregate/" + @user.pub_cat_aggregate_id.to_s)
+        result = Curl.get(Rails.configuration.feed_webservice_url + "/get_personalized_pub_cat_aggregate/" + @user.pub_cat_aggregate_id.to_s)
         result_json = JSON.parse(result.body_str) unless result.body_str == "null"
       end 
     end
     
     if result_json.empty?
-      result = Curl.get(Silverstar::Application.config.feed_webservice_url + "/get_default_pub_cat_aggregate/")
+      result = Curl.get(Rails.configuration.feed_webservice_url + "/get_default_pub_cat_aggregate/")
       result_json = JSON.parse(result.body_str)
     end 
 

@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   def get_pub_cat_namelist
     if signed_in? == false || ( params['controller'] == "users" && ( params['action'] == "edit" || 
                                 params['action'] == "update" || params['action'] == "show") )
-      result = Curl.get(Silverstar::Application.config.feed_webservice_url + "/get_pub_cat_namelist/")
+      result = Curl.get(Rails.configuration.feed_webservice_url + "/get_pub_cat_namelist/")
       @pub_cat_namelist = JSON.parse(result.body_str)
     end
   end

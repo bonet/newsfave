@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
 
-gem 'rb-readline'
 gem 'rake'
 gem 'gravatar_image_tag'
 gem "cocaine"
@@ -37,7 +36,7 @@ group :development do
   gem 'rb-fchange', :require => false
   gem 'rb-fsevent', '~> 0.9.2'
   gem 'rb-inotify', :require => false
-  gem 'rb-readline', :require => false
+  gem 'rb-readline', '~> 0.4.2', :require => false
 end
 
 group :test do

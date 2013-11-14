@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130325161620) do
+ActiveRecord::Schema.define(:version => 20131114125743) do
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(:version => 20130325161620) do
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "users", :force => true do |t|
-    t.string   "username"
-    t.string   "email"
+    t.string   "username",             :null => false
+    t.string   "email",                :null => false
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
     t.string   "encrypted_password"
@@ -34,5 +34,6 @@ ActiveRecord::Schema.define(:version => 20130325161620) do
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
 end

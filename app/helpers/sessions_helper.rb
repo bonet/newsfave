@@ -12,7 +12,4 @@ module SessionsHelper
     return render :nothing => true 
   end
   
-  def sign_out
-    session[:user_id] = nil
-  end
 end

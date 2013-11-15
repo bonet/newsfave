@@ -1,11 +1,12 @@
 require 'spec_helper'
 
 describe RegistrationsController do
-  let(:user_1) { FactoryGirl.build(:user) }
   
   before :each do
     request.env['devise.mapping'] = Devise.mappings[:user]
   end
+  
+  let(:user_1) { FactoryGirl.build(:user) }
 
   describe "GET 'new" do
     before { get :new }

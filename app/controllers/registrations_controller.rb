@@ -23,17 +23,11 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
 
-  def update
+  def edit
     @user = User.find(session[:user_id])
-
-    if params[:edit_info].present? && (!params[:user][:password].blank?) && (params[:user][:password] == params[:user][:password_confirmation])
-      @user.password = params[:user][:password] 
-      @user.save
-    end
-    
-    render 'edit'
+    render 'users/registrations/edit'
   end
-  
+
   
   def update_pub_cats
     @user = User.find(session[:user_id])
@@ -54,12 +48,6 @@ class RegistrationsController < Devise::RegistrationsController
     
     render :text => { "pub_cat_aggregate_id" => pca['_id'].to_s }.to_json
     
-  end
-  
-  
-  def edit
-    @user = User.find(session[:user_id])
-    render 'edit'
   end
   
   

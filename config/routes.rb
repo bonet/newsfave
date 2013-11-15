@@ -1,7 +1,7 @@
 Silverstar::Application.routes.draw do
   
   devise_for :users, :controllers => {:registrations => "registrations", :sessions => "sessions"}
-  resources :users, :only => [:show]
+  resources :users, :only => [:show, :update]
   
   match '/feedlist', :to => 'pages#feedlist'
   match '/about', :to => 'pages#about'

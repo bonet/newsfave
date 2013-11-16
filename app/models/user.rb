@@ -60,11 +60,17 @@ class User < ActiveRecord::Base
   end
   
   
+  def self.get_categories_per_publisher_json
+    result = Curl.get(Rails.configuration.api_location_get_default_categories_per_publisher)
+    result_json = result.body_str == "null" ? "" : JSON.parse(result.body_str)
+  end
+  
+  
   def retrieve_categories_per_publisher_json
-    api_location = self.newsfeed_aggregate_id.present? ? Rails.configuration.api_location_get_personalized_newsfeed_aggregate + self.newsfeed_aggregate_id.to_s : Rails.configuration.api_location_get_default_newsfeed_aggregate
-    
+    api_location = self.newsfeed_aggregate_id.blank? ? Rails.configuration.api_location_get_default_categories_per_publisher : Rails.configuration.api_location_get_personalized_categories_per_publisher + self.newsfeed_aggregate_id.to_s
+
     result = Curl.get(api_location)
-    newsfeed_aggregate_json = result.body_str == "null" ? "" : JSON.parse(result.body_str)
+    categories_per_publisher_json = result.body_str == "null" ? "" : JSON.parse(result.body_str)
   end 
   
   

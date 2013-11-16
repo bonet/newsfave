@@ -1,18 +1,13 @@
 class UsersController < ApplicationController
 
-  before_action :retrieve_user, :only => :show
+  before_filter :retrieve_user, :only => :show
   
   def show
-    
     @pub_cat_json = ""
     
-    @api_string = "/get_pub_cat_namelist"
-    
-    if @user.pub_cat_aggregate_id.present?
-      @api_string = "/get_personalized_pub_cat_namelist/" + @user.pub_cat_aggregate_id.to_s
-    end
+    @api_location = @user.pub_cat_aggregate_id.present? ? Rails.configuration.api_location_get_personalized_newsfeed_aggregate + @user.pub_cat_aggregate_id.to_s : Rails.configuration.api_location_get_default_newsfeed_aggregate
 
-    result = Curl.get(Rails.configuration.feed_webservice_url + @api_string)
+    result = Curl.get(@api_location)
     @pub_cat_namelist_json = JSON.parse(result.body_str) unless result.body_str == "null"
 
     @namelist_hash = {}
@@ -32,30 +27,19 @@ class UsersController < ApplicationController
   end
 
   
+
+  
+  
   private
     
-    def session_authenticate
-      self.set_cache_buster # ApplicationController method
-      deny_access unless signed_in? #sessions_helper
+  def retrieve_user
+    begin
+      @user = User.find(session[:user_id])
+      @title = @user.username
+    rescue
+      redirect_to new_user_session_path
+      return
     end
-    
-    def session_authenticate_no_html
-      self.set_cache_buster # ApplicationController method
-      deny_access_no_html unless signed_in? #sessions_helper
-    end
-    
-    def params_check
-      return render :nothing => true if params['pub_cat_ids'].nil?
-    end
-    
-    def retrieve_user
-      begin
-        @user = User.find(session[:user_id])
-        @title = @user.username
-      rescue
-        redirect_to new_user_session_path
-        return
-      end
-    end
+  end
     
 end

@@ -5,7 +5,7 @@
 
   <ul class="nav nav-tabs" id="category-nav" style="display:block;">
   	
-  	<% @categories_json.each do |c1| %>
+  	<% @result_json['newsfeed_aggregate_per_categories'].each do |c1| %>
 	  	<% count1 = count1 + 1 %>
 	    <li class="content-tab <%= count1 == 1 ? 'active' : ''%>"><a href="#tab<%= count1.to_s %>" data-toggle="tab"><%= c1['category_name'] %> </a></li>
     <% end %>
@@ -13,7 +13,7 @@
 
   <% j = 0 %>
   <ul class="nav nav-tabs" id="publisher-nav" style="display:none">
-  	<% @publishers_json.each do |p1| %>
+  	<% @result_json['newsfeed_aggregate_per_publishers'].each do |p1| %>
 	  	<% count1 = count1 + 1 %>
 	  	<% j = j + 1 %>
 	    <li class="content-tab <%= j == 1 ? 'active' : ''%>"><a href="#tab<%= count1.to_s %>" data-toggle="tab"><%= p1['publisher_name'] %> </a></li>
@@ -26,9 +26,7 @@
   
   <% count2 = 0 %>
   <div class="tab-content" id="category-content">
-  	
-  		
-	  	<% @categories_json.each do |c2| %>
+	  	<% @result_json['newsfeed_aggregate_per_categories'].each do |c2| %>
 		  	<% count2 = count2 + 1 %>
 		  	
 		    <div class="tab-pane <%= count2 == 1 ? 'active' : ''%>" id="tab<%= count2.to_s %>">
@@ -44,7 +42,7 @@
   </div>
   <div class="tab-content" id="publisher-content" style="display:none">
         <% k = 0 %>
-	  	<% @publishers_json.each do |p2| %>
+	  	<% @result_json['newsfeed_aggregate_per_publishers'].each do |p2| %>
 		  	<% count2 = count2 + 1 %>
 		  	<% k = k + 1 %>
 		    <div class="tab-pane <%= k == 1 ? 'active' : ''%>" id="tab<%= count2.to_s %>">

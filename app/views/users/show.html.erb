@@ -4,7 +4,7 @@
   	<td class="main">
   		<h2>
 			<%= @user.username %>
-			<span><%= link_to "[Edit Info]",  edit_user_path(@user) , :class => "edit-info" %></span>
+			<span><%= link_to "[Edit Info]",  edit_user_registration_path(@user) , :class => "edit-info" %></span>
 		</h2>
 
 		<div>
@@ -15,7 +15,7 @@
 		</div>
 
       <div>
-      	<h4>Subscribed Feeds: <span><%= link_to "[Edit]",  edit_user_path(@user) , :class => "edit-info" %></span></h4>
+      	<h4>Subscribed Feeds: <span><%= link_to "[Edit]",  edit_user_registration_path(@user) , :class => "edit-info" %></span></h4>
       	<br />
       	<ul>
 	      	<% @namelist_hash.each do |publisher, categories| %>

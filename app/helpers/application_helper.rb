@@ -16,8 +16,15 @@ module ApplicationHelper
   
   def valid_json? json_  
     JSON.parse(json_)  
-    return true  
+    true  
   rescue JSON::ParserError  
-    return false  
+    false  
   end 
+  
+  def retrieve_default_categories_per_publisher
+    if signed_in? == false
+      result = Curl.get(Rails.configuration.api_location_get_default_categories_per_publisher)
+      @default_categories_per_publisher = JSON.parse(result.body_str)
+    end
+  end
 end

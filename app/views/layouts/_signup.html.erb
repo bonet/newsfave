@@ -29,8 +29,8 @@
 		<% end %>
 
 	
-		<% if signed_in? == false && @pub_cat_namelist.present? %>
-			<%= form_tag("/users/update_pub_cats", :method => "post", :class => "hide", :id => "signup_step2") do %>
+		<% if signed_in? == false && @default_categories_per_publisher.present? %>
+			<%= form_tag("/users/update_newsfeeds", :method => "post", :class => "hide", :id => "signup_step2") do %>
 				<h1>Choose Feeds</h1>
 	
 				<p style="margin-top:5px;">Congratulations, you've been signed up to NewsFave.com!</p> 
@@ -43,7 +43,7 @@
 					</tr>
 					<tr>
 						<td style="width:50%;" valign="top">
-							<% @pub_cat_namelist.each do |key, val| %>
+							<% @default_categories_per_publisher.each do |key, val| %>
 								<div id="publisher<%= key %>" class="namelist-publisher">
 									<span style="padding-left:10px;"><%= val['publisher_name'] %></span>
 								</div>
@@ -51,7 +51,7 @@
 							<% end %>
 						</td>
 						<td id="pub_cat_namelist_category" style="width:50%" valign="top">
-							<% @pub_cat_namelist.each do |key, val| %>
+							<% @default_categories_per_publisher.each do |key, val| %>
 								<div id="cat_publisher<%= key %>" class="hide cat-namelist-publisher">
 									<% val['categories'].each do |m| %>
 									<%= raw "<input type='checkbox' name='pub_cat' id='pub_cat."+ m['pub_cat_id'].to_s+"' class='checkbox-for-publisher" + key.to_s + "' value='"+ m['pub_cat_id'].to_s+"' style='margin: -5px 10px 0 0' />" %>

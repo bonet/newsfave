@@ -65,6 +65,16 @@ module Silverstar
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     
-    config.feed_webservice_url = "http://aqueous-dusk-7705.herokuapp.com"
+    config.feed_webservice_url = "http://#{ENV['FEED_WEBSERVICE_HOST']}"
+    
+    config.api_location_create_personalized_newsfeed_aggregate = "http://#{ENV['FEED_WEBSERVICE_HOST']}/newsfeed_aggregates"
+    
+    config.api_location_get_personalized_newsfeed_aggregate = "http://#{ENV['FEED_WEBSERVICE_HOST']}/newsfeed_aggregates/"
+    
+    config.api_location_get_default_newsfeed_aggregate = "http://#{ENV['FEED_WEBSERVICE_HOST']}/default_newsfeed_aggregate"
+    
+    config.api_location_get_personalized_categories_per_publisher = "http://#{ENV['FEED_WEBSERVICE_HOST']}/categories_per_publishers/"
+    
+    config.api_location_get_default_categories_per_publisher = "http://#{ENV['FEED_WEBSERVICE_HOST']}/default_categories_per_publisher"
   end
 end

@@ -50,7 +50,7 @@ class RegistrationsController < Devise::RegistrationsController
   
   def feed_subscribe
     @user = User.find(session[:user_id])
-    @user.subscribe_to_newsfeeds(param['newsfeed_ids'])
+    @user.subscribe_to_newsfeeds(params['newsfeed_ids'])
     
     render :text => { "newsfeed_aggregate_id" => @user.newsfeed_aggregate_id.to_s }.to_json
   end

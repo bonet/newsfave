@@ -2,10 +2,10 @@ $(function() {
 
   // Step 1 (Sign Up)
   $("button#signupButton").on("click", function() {
-  	var username = $("input[type=text][name='user[username]']").val(); 
-  	var email = $("input[type=text][name='user[email]']").val();
-  	var password = $("input[type=password][name='user[password]']").val();
-  	var password_confirmation = $("input[type=password][name='user[password_confirmation]']").val();
+  	var username = $("form#signup_step1 input[type=text][name='user[username]']").val(); 
+  	var email = $("form#signup_step1 input[type=text][name='user[email]']").val();
+  	var password = $("form#signup_step1 input[type=password][name='user[password]']").val();
+  	var password_confirmation = $("form#signup_step1 input[type=password][name='user[password_confirmation]']").val();
   	var input_variables = {};
   	
   	input_variables['user[username]'] = username;

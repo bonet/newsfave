@@ -5,8 +5,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :validatable
   
   attr_accessible :username, :email, :password, :password_confirmation
-
-  attr_reader :newsfeed_aggregate_id
   
 =begin
   #Paperclip Stuff

@@ -31,7 +31,7 @@ $(function() {
 
   	  var errors = $.parseJSON(jqXHR.responseText).errors;
   	  for (key in errors) {
-  	  	error_string += "<li>" + errors[key] + "</li>" 
+  	  	error_string += "<li>" + errors[key] + "</li>";
   	  }
   	  
   	  if(error_string != "") {

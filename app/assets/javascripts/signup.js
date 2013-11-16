@@ -56,7 +56,7 @@ $(function() {
   		var request = $.ajax({
 		  url: "/feed_subscribe",
 		  type: "GET",
-		  data: {pub_cat_ids : str},
+		  data: {newsfeed_ids : str},
 		  dataType: "json"
 		});
 		
@@ -93,7 +93,7 @@ $(function() {
 	  		var arr = pub_val.split(",");
 	  		
 		  	for(k in arr) {
-		  		$("#pub_cat."+arr[k]+"").prop('checked', true);
+		  		$("#newsfeed."+arr[k]+"").prop('checked', true);
 		  	}
 	  	}
 	});
@@ -108,7 +108,7 @@ $(function() {
 				obj.checked = false;
 			});
 			
-			$("input:hidden[name='pub["+ key +"]']").prop("value", ""); //empty csv list of pub_cats in input hidden value
+			$("input:hidden[name='pub["+ key +"]']").prop("value", ""); //empty csv list of newsfeeds in input hidden value
 		}
 		else {
 			$(this).addClass('chosen');  //choose
@@ -118,12 +118,12 @@ $(function() {
 				arr.push(obj.value);
 			});
 			var str = arr.join(",");
-			$("input:hidden[name='pub["+ key +"]']").val(str);  //update csv list of pub_cats in input hidden value
+			$("input:hidden[name='pub["+ key +"]']").val(str);  //update csv list of newsfeeds in input hidden value
 		}
 	});
 	
 	//Category checkbox on click
-	$("input:checkbox[name=pub_cat]").on("click", function() {
+	$("input:checkbox[name=newsfeed]").on("click", function() {
 		var pub_id = this.className.substring(22);
 		
 		//if one category checkbox if clicked, it automatically chooses the publisher too
@@ -141,7 +141,7 @@ $(function() {
 		
 		var str = arr.join(",");
 		
-		$("input:hidden[name='pub["+ pub_id +"]']").val(str);  //update csv list of pub_cats in input hidden value
+		$("input:hidden[name='pub["+ pub_id +"]']").val(str);  //update csv list of newsfeeds in input hidden value
 		
 		//un-choose publisher if no categories for that publisher is checked 
 		if(str.length === 0) {

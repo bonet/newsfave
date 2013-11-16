@@ -54,8 +54,8 @@
 							<% @default_categories_per_publisher.each do |key, val| %>
 								<div id="cat_publisher<%= key %>" class="hide cat-namelist-publisher">
 									<% val['categories'].each do |m| %>
-									<%= raw "<input type='checkbox' name='pub_cat' id='pub_cat."+ m['pub_cat_id'].to_s+"' class='checkbox-for-publisher" + key.to_s + "' value='"+ m['pub_cat_id'].to_s+"' style='margin: -5px 10px 0 0' />" %>
-									<%= raw "<label for='pub_cat."+m['pub_cat_id'].to_s+"' style='display: inline-block'> " + m['category_name'] + "</label><br />" %>
+									<%= raw "<input type='checkbox' name='newsfeed' id='newsfeed."+ m['newsfeed_id'].to_s+"' class='checkbox-for-publisher" + key.to_s + "' value='"+ m['newsfeed_id'].to_s+"' style='margin: -5px 10px 0 0' />" %>
+									<%= raw "<label for='newsfeed."+m['newsfeed_id'].to_s+"' style='display: inline-block'> " + m['category_name'] + "</label><br />" %>
 									<% end %>
 								</div>
 							<% end %>

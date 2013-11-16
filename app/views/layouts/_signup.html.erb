@@ -30,7 +30,7 @@
 
 	
 		<% if signed_in? == false && @default_categories_per_publisher.present? %>
-			<%= form_tag("/users/update_newsfeeds", :method => "post", :class => "hide", :id => "signup_step2") do %>
+			<%= form_tag("/", :method => "post", :class => "hide", :id => "signup_step2") do %>
 				<h1>Choose Feeds</h1>
 	
 				<p style="margin-top:5px;">Congratulations, you've been signed up to NewsFave.com!</p> 

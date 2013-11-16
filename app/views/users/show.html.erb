@@ -18,7 +18,7 @@
       	<h4>Subscribed Feeds: <span><%= link_to "[Edit]",  edit_user_registration_path(@user) , :class => "edit-info" %></span></h4>
       	<br />
       	<ul>
-	      	<% @namelist_hash.each do |publisher, categories| %>
+	      	<% @categories_per_publisher_hash.each do |publisher, categories| %>
 	      	
 	      	<li style="margin: 0 0 20px 0">
 	      		<table style="margin: -20px 0 0 0">

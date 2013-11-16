@@ -25,6 +25,8 @@ class RegistrationsController < Devise::RegistrationsController
 
   def edit
     @user = User.find(session[:user_id])
+    @categories_per_publisher_json = @user.retrieve_categories_per_publisher_json
+    
     render 'users/registrations/edit'
   end
   

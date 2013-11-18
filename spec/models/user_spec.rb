@@ -114,9 +114,23 @@ describe User do
   end
   
   context "Subscribe Newsfeed IDs" do
-    it "should give User a NewsfeedAggregate ID" do
+    
+    before do
       user1.subscribe_to_newsfeeds('1,2')
+    end
+    
+    it "should give User a NewsfeedAggregate ID" do
       user1.newsfeed_aggregate_id.should be > 0
+    end
+    
+    it "should return the correct JSON" do
+      user1.retrieve_categories_per_publisher_json.each do |key, publisher|
+        if [1,2].include?(publisher['categories'].first['newsfeed_id'])
+          publisher['categories'].first['owned'].should eq("true")
+        else
+          publisher['categories'].first['owned'].should eq("false")
+        end
+      end
     end
   end
 

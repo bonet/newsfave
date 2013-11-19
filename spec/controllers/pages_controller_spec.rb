@@ -14,6 +14,8 @@ describe PagesController do
     
     context "Controller variables" do
       it{ assigns(:title).should eq('Home') }
+      it { response.should be_success }
+      it { response.should render_template('pages/home') }
     end
     
     context "Signed In" do
@@ -40,6 +42,8 @@ describe PagesController do
     context "Controller variables" do
       before { get :feedlist }
       it{ assigns(:title).should eq('Feed List') }
+      it { response.should be_success }
+      it { response.should render_template('pages/feedlist') }
     end
   end
 end

@@ -1,4 +1,4 @@
-class RegistrationsController < Devise::RegistrationsController
+class RegistrationsController < ApplicationController
   
   before_filter :params_check, :only => [:feed_subscribe]
   after_filter :populate_session, :only => :create
@@ -35,6 +35,7 @@ class RegistrationsController < Devise::RegistrationsController
     @user = User.find(session[:user_id])
     
     if (!params[:user][:password].blank?) && (params[:user][:password] == params[:user][:password_confirmation])
+      
       @user.password = params[:user][:password] 
       @user.save!
     end
@@ -42,11 +43,6 @@ class RegistrationsController < Devise::RegistrationsController
     redirect_to edit_user_registration_path
   end
 
-  
-  def update_newsfeeds
-    @user = User.find(session[:user_id])
-  end
-  
   
   def feed_subscribe
     @user = User.find(session[:user_id])

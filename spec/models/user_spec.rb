@@ -20,6 +20,10 @@ describe User do
     it { should ensure_length_of(:password).is_at_most(128) }
   end
   
+  
+  #IMPORTANT: for the tests below, make sure that Feed Webservice API is activated on another server (port), so Curl calls can be executed
+  #           successfully.  Also make sure that (Category, Publisher, and Newsfeed) data are set accordingly from Feed Webservice admin.
+  
   context "Get newsfeed Aggregate" do
     context "- Default" do
       it "should return the correct JSON" do

@@ -16,6 +16,10 @@ describe SessionsController do
     it { assigns(:title).should eql('Sign In') }
   end
   
+  
+  #IMPORTANT: for the tests below, make sure that Feed Webservice API is activated on another server (port), so Curl calls can be executed
+  #           successfully.  Also make sure that (Category, Publisher, and Newsfeed) data are set accordingly from Feed Webservice admin.
+  
   describe "POST 'create'" do
     context "Login" do
       it "correct inputs" do

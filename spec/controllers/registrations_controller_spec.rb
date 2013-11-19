@@ -101,7 +101,7 @@ describe RegistrationsController do
   end
   
   
-  describe "POST 'feed_subscribe'", focus: true do
+  describe "POST 'feed_subscribe'" do
     before do
       user_1.save
       session[:user_id] = user_1.id   # sign in

@@ -65,6 +65,9 @@ module Silverstar
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     
+    # To prevent initializing the application and connecting to the database while precompiling assets
+    config.assets.initialize_on_precompile = false
+    
     config.feed_webservice_url = "http://#{ENV['FEED_WEBSERVICE_HOST']}"
     
     config.api_location_create_personalized_newsfeed_aggregate = "http://#{ENV['FEED_WEBSERVICE_HOST']}/newsfeed_aggregates"

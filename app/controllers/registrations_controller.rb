@@ -1,5 +1,6 @@
 class RegistrationsController < ApplicationController
   
+  before_filter :check_session, :only => [:edit, :update]
   before_filter :params_check, :only => [:feed_subscribe]
   after_filter :populate_session, :only => :create
   
@@ -60,6 +61,16 @@ class RegistrationsController < ApplicationController
   
   def populate_session
     session[:user_id] = @user.id
+  end
+  
+  
+  def check_session
+    begin
+      User.find(session[:user_id])
+    rescue
+      redirect_to new_user_session_path
+      return
+    end
   end
   
 end

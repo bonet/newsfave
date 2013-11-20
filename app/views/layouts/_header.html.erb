@@ -25,7 +25,7 @@
 				<li class="header-tab"><%= link_to 'Sign out', :destroy_user_session, :method => :delete %></li>
 			  </ul>
 			<% else %>
-			  <%= form_for( :user, :url => user_session_path, :html => {:class => "navbar-form pull-right signin-form"} ) do |f| %>
+			  <%= form_for( :user, :url => user_session_path, :html => {:class => "navbar-form pull-right signin-form", :id => "signin_on_top" } ) do |f| %>
 	            <%= f.text_field :email, :class => "span2", :placeholder => "Email"  %>
 	            <%= f.password_field :password, :class => "span2", :placeholder => "Password"  %>
 	            <%= f.submit "Sign In", :class => "btn" %>

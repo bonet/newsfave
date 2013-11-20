@@ -2,7 +2,7 @@
 <table style="width:100%">
   <tr>
     <td style="width:370px">
-      <%= form_for( :user, :url => url_for(:controller => 'registrations', :action => 'update') ) do |f| %>
+      <%= form_for( :user, :url => url_for(:controller => 'registrations', :action => 'update'), :html => { :id => "edit_user_info"} ) do |f| %>
         
         <input type="hidden" name="_method" value="PUT" class="" />
         

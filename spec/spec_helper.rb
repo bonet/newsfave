@@ -53,6 +53,8 @@ Spork.prefork do
     config.after(:all) do
       DatabaseCleaner.clean
     end
+    
+    Capybara.javascript_driver = :webkit
   end
 
 end

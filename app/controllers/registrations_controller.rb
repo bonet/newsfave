@@ -11,15 +11,11 @@ class RegistrationsController < ApplicationController
 
 
   def create
-    begin
-      @user = User.new(params[:user]) 
-      if @user.save
-        render :json => { :username => @user.username }
-      else
-        render :json => { :errors => @user.errors.full_messages }, :status => 422
-      end
-    rescue Exception => e  
-      render :json => { :errors => e.message }, :status => 422
+    @user = User.new(params[:user]) 
+    if @user.save
+      render :json => { :username => @user.username }
+    else
+      render :json => { :errors => @user.errors.full_messages }, :status => 422
     end
   end
 

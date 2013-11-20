@@ -15,15 +15,14 @@ gem 'foreman'
 gem 'jquery-rails'
 gem 'figaro'
 gem 'devise'
-  
+gem 'pg'
+
 group :production do
-  gem 'pg'
   gem 'newrelic_rpm'
   gem 'unicorn'
 end
 
 group :development, :test do
-  gem 'sqlite3'
   gem 'simplecov'
 end
 
@@ -49,6 +48,7 @@ group :test do
   gem 'guard-spork'
   gem 'factory_girl_rails'
   gem 'capybara'
+  gem 'capybara-webkit' # need to install qt first: `brew install qt`
   gem 'database_cleaner'
   gem 'shoulda-matchers'
   gem 'mailcatcher'

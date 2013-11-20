@@ -53,6 +53,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-webkit (1.0.0)
+      capybara (~> 2.0, >= 2.0.2)
+      json
     celluloid (0.15.2)
       timers (~> 1.1.0)
     childprocess (0.3.9)
@@ -139,7 +142,6 @@ GEM
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
-    lockfile (2.1.0)
     lumberjack (1.0.4)
     mail (2.4.4)
       i18n (>= 0.4.0)
@@ -251,9 +253,8 @@ GEM
       tilt (~> 1.3)
     shoulda-matchers (2.4.0)
       activesupport (>= 3.0.0)
-    simplecov (0.8.1)
+    simplecov (0.8.2)
       docile (~> 1.1.0)
-      lockfile (>= 2.1.0)
       multi_json
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
@@ -311,6 +312,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   capybara
+  capybara-webkit
   cocaine
   coffee-rails (~> 3.2.1)
   colorize
@@ -341,7 +343,6 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   shoulda-matchers
   simplecov
-  sqlite3
   thin
   uglifier (>= 1.0.3)
   unicorn

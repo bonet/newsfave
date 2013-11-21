@@ -73,6 +73,12 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     colorize (0.6.0)
+    coveralls (0.7.0)
+      multi_json (~> 1.3)
+      rest-client
+      simplecov (>= 0.7)
+      term-ansicolor
+      thor
     curb (0.8.5)
     daemons (1.1.9)
     database_cleaner (1.2.0)
@@ -231,6 +237,8 @@ GEM
     rb-readline (0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -274,6 +282,8 @@ GEM
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.8)
     sqlite3 (1.3.8-x86-mingw32)
+    term-ansicolor (1.2.2)
+      tins (~> 0.8)
     thin (1.5.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -283,6 +293,7 @@ GEM
       atomic
     tilt (1.4.1)
     timers (1.1.0)
+    tins (0.13.1)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -316,6 +327,7 @@ DEPENDENCIES
   cocaine
   coffee-rails (~> 3.2.1)
   colorize
+  coveralls
   curb
   database_cleaner
   devise

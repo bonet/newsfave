@@ -17,6 +17,8 @@ gem 'figaro'
 gem 'devise'
 gem 'pg'
 
+gem 'coveralls', require: false
+
 group :production do
   gem 'newrelic_rpm'
   gem 'unicorn'

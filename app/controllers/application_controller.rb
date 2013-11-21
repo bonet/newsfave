@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   
   include ApplicationHelper
   
-  before_filter :retrieve_default_categories_per_publisher
+  before_filter :set_cache_buster, :retrieve_default_categories_per_publisher
   
   protect_from_forgery
   

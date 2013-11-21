@@ -85,11 +85,11 @@ describe User do
     context "- Default" do
       it "should return the correct JSON" do
         json = User.get_categories_per_publisher_json
-        json['1']['publisher_id'].should be > 0
-        json['1']['publisher_name'].should_not be_blank
-        json['1']['categories'][0]['category_id'].should be > 0
-        json['1']['categories'][0]['category_name'].should_not be_blank
-        json['1']['categories'][0]['newsfeed_id'].should be > 0
+        json.first[1]['publisher_id'].should be > 0
+        json.first[1]['publisher_name'].should_not be_blank
+        json.first[1]['categories'][0]['category_id'].should be > 0
+        json.first[1]['categories'][0]['category_name'].should_not be_blank
+        json.first[1]['categories'][0]['newsfeed_id'].should be > 0
       end
     end
     
@@ -97,22 +97,22 @@ describe User do
       it "should return the correct JSON" do
         user1.subscribe_to_newsfeeds('1,2')   # subscribe `newsfeed_ids`
         json = user1.retrieve_categories_per_publisher_json
-        json['1']['publisher_id'].should be > 0
-        json['1']['publisher_name'].should_not be_blank
-        json['1']['categories'][0]['category_id'].should be > 0
-        json['1']['categories'][0]['category_name'].should_not be_blank
-        json['1']['categories'][0]['newsfeed_id'].should be > 0
+        json.first[1]['publisher_id'].should be > 0
+        json.first[1]['publisher_name'].should_not be_blank
+        json.first[1]['categories'][0]['category_id'].should be > 0
+        json.first[1]['categories'][0]['category_name'].should_not be_blank
+        json.first[1]['categories'][0]['newsfeed_id'].should be > 0
       end
     end
     
     context "- Personalized (with newsfeed_aggregate_id blank?, a.k.a Default result)" do
       it "should return the correct JSON" do
         json = user1.retrieve_categories_per_publisher_json  # don't subscribe `newsfeed_ids` to retrieve default
-        json['1']['publisher_id'].should be > 0
-        json['1']['publisher_name'].should_not be_blank
-        json['1']['categories'][0]['category_id'].should be > 0
-        json['1']['categories'][0]['category_name'].should_not be_blank
-        json['1']['categories'][0]['newsfeed_id'].should be > 0
+        json.first[1]['publisher_id'].should be > 0
+        json.first[1]['publisher_name'].should_not be_blank
+        json.first[1]['categories'][0]['category_id'].should be > 0
+        json.first[1]['categories'][0]['category_name'].should_not be_blank
+        json.first[1]['categories'][0]['newsfeed_id'].should be > 0
       end
     end
   end

@@ -63,8 +63,6 @@ feature "User Sign Up" do
     
     page.should have_content('Choose Feeds')
     
-    page.find('#publisher2').trigger(:mouseover)
-    
     c = User.get_categories_per_publisher_json
     
     publisher_id_1 = "#publisher" + c.values[1]['publisher_id'].to_s

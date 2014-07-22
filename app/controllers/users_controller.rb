@@ -6,11 +6,13 @@ class UsersController < ApplicationController
     
     @categories_per_publisher_hash = {}
     
-    @user.retrieve_categories_per_publisher_json.each do |k,v| 
-      v['categories'].each do |m|
-        if @user.newsfeed_aggregate_id.blank? || m['owned'] == "true"
-          @categories_per_publisher_hash[v['publisher_name']] = [] if @categories_per_publisher_hash[v['publisher_name']].nil?
-          @categories_per_publisher_hash[v['publisher_name']] << m['category_name']
+    if !@user.retrieve_categories_per_publisher_json.blank?
+      @user.retrieve_categories_per_publisher_json.each do |k,v| 
+        v['categories'].each do |m|
+          if @user.newsfeed_aggregate_id.blank? || m['owned'] == "true"
+            @categories_per_publisher_hash[v['publisher_name']] = [] if @categories_per_publisher_hash[v['publisher_name']].nil?
+            @categories_per_publisher_hash[v['publisher_name']] << m['category_name']
+          end
         end
       end
     end

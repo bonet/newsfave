@@ -153,7 +153,7 @@ class User < ActiveRecord::Base
   
   def self.get_newsfeed_aggregate_json
     result = Curl.get(Rails.configuration.api_location_get_default_newsfeed_aggregate)
-    result_json = result.body_str == "null" ? "" : JSON.parse(result.body_str)
+    result_json = (result.response_code == 200) ? JSON.parse(result.body_str) : nil
   end
   
   
@@ -167,13 +167,13 @@ class User < ActiveRecord::Base
     if self.newsfeed_aggregate_id.blank? == false
       # get personalized
       result = Curl.get(Rails.configuration.api_location_get_personalized_newsfeed_aggregate + self.newsfeed_aggregate_id.to_s)
-      newsfeed_aggregate_json = result.body_str == "null" ? "" : JSON.parse(result.body_str)
+      newsfeed_aggregate_json = (result.response_code == 200) ? JSON.parse(result.body_str) : nil
     end
     
     if newsfeed_aggregate_json.blank?
       # get default
       result = Curl.get(Rails.configuration.api_location_get_default_newsfeed_aggregate)
-      newsfeed_aggregate_json = JSON.parse(result.body_str)
+      newsfeed_aggregate_json = (result.response_code == 200) ? JSON.parse(result.body_str) : nil
     end   
     
     newsfeed_aggregate_json
@@ -198,7 +198,7 @@ class User < ActiveRecord::Base
   
   def self.get_categories_per_publisher_json
     result = Curl.get(Rails.configuration.api_location_get_default_categories_per_publisher)
-    result_json = result.body_str == "null" ? "" : JSON.parse(result.body_str)
+    result_json = (result.response_code == 200) ? JSON.parse(result.body_str) : nil
   end
   
   
@@ -231,14 +231,14 @@ class User < ActiveRecord::Base
     api_location = self.newsfeed_aggregate_id.blank? ? Rails.configuration.api_location_get_default_categories_per_publisher : Rails.configuration.api_location_get_personalized_categories_per_publisher + self.newsfeed_aggregate_id.to_s
 
     result = Curl.get(api_location)
-    categories_per_publisher_json = result.body_str == "null" ? "" : JSON.parse(result.body_str)
+    categories_per_publisher_json = (result.response_code == 200) ? JSON.parse(result.body_str) : nil
   end 
   
   
   def subscribe_to_newsfeeds(newsfeed_ids)
     result = Curl::Easy.http_post(Rails.configuration.api_location_create_personalized_newsfeed_aggregate, 
                                   Curl::PostField.content('newsfeed_ids', newsfeed_ids))
-    newsfeed_aggregate = JSON.parse(result.body_str)
+    newsfeed_aggregate = (result.response_code == 200) ? JSON.parse(result.body_str) : nil
     
     unless newsfeed_aggregate['_id'].nil?
       self.newsfeed_aggregate_id = newsfeed_aggregate['_id']

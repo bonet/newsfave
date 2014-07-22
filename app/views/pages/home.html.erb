@@ -2,7 +2,7 @@
 <div class="tabbable"> <!-- Only required for left/right tabs -->
   <% count1 = 0 %>
 
-
+  <% if !@result_json['newsfeed_aggregate_per_categories'].blank? && !@result_json['newsfeed_aggregate_per_publishers'].blank? %>
   <ul class="nav nav-tabs" id="category-nav" style="display:block;">
   	
   	<% @result_json['newsfeed_aggregate_per_categories'].each do |c1| %>
@@ -19,12 +19,14 @@
 	    <li class="content-tab <%= j == 1 ? 'active' : ''%>"><a href="#tab<%= count1.to_s %>" data-toggle="tab"><%= p1['publisher_name'] %> </a></li>
     <% end %>
   </ul>
+  <% end %>
   <%= render "layouts/filter_dropdown" %>
 
   
 
   
   <% count2 = 0 %>
+  <% if !@result_json['newsfeed_aggregate_per_categories'].blank? && !@result_json['newsfeed_aggregate_per_publishers'].blank? %>
   <div class="tab-content" id="category-content">
 	  	<% @result_json['newsfeed_aggregate_per_categories'].each do |c2| %>
 		  	<% count2 = count2 + 1 %>
@@ -57,4 +59,5 @@
 	    <% end %>
 
   </div>
+  <% end %>
 </div>

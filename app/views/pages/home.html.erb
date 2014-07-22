@@ -2,7 +2,7 @@
 <div class="tabbable"> <!-- Only required for left/right tabs -->
   <% count1 = 0 %>
 
-  <% if !@result_json['newsfeed_aggregate_per_categories'].blank? && !@result_json['newsfeed_aggregate_per_publishers'].blank? %>
+  <% if !@result_json.try(:newsfeed_aggregate_per_categories).blank? && !@result_json.try(:newsfeed_aggregate_per_publishers).blank? %>
   <ul class="nav nav-tabs" id="category-nav" style="display:block;">
   	
   	<% @result_json['newsfeed_aggregate_per_categories'].each do |c1| %>
@@ -26,7 +26,7 @@
 
   
   <% count2 = 0 %>
-  <% if !@result_json['newsfeed_aggregate_per_categories'].blank? && !@result_json['newsfeed_aggregate_per_publishers'].blank? %>
+  <% if !@result_json.try(:newsfeed_aggregate_per_categories).blank? && !@result_json.try(:newsfeed_aggregate_per_publishers).blank? %>
   <div class="tab-content" id="category-content">
 	  	<% @result_json['newsfeed_aggregate_per_categories'].each do |c2| %>
 		  	<% count2 = count2 + 1 %>

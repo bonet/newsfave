@@ -38,6 +38,7 @@
           <td style="width:400px;" class="namelist-publisher-title"><b>Publishers</b></td>
           <td style="width:400px;" class="namelist-category-title"><b><span id="category_title"></span>Categories</b></td>
         </tr>
+        <% if !@categories_per_publisher_json.blank? %>
         <tr>
           <td style="width:400px;">
             <% @categories_per_publisher_json.each do |key, val| %>
@@ -59,6 +60,7 @@
             <% end %>
           </td>
         </tr>
+        <% end %>
         <tr>
           <td colspan="2">
             <input type="hidden" name="edit_subscription" value="true" class="" />
